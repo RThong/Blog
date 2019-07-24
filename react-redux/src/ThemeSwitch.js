@@ -1,39 +1,21 @@
 import React, { Component } from 'react'
-import { Context } from './context'
-
+import { connect } from './react-redux'
 class ThemeSwitch extends Component {
-	static contextType = Context
-
-	state = {
-		themeColor: ''
-	}
-	componentWillMount() {
-		const store = this.context
-		this.setState({
-			themeColor: store.getState().themeColor
-		})
-		store.subscribe(() => {
-			this.setState({
-				themeColor: store.getState().themeColor
-			})
-		})
-	}
-
 	render() {
 		return (
 			<div>
 				<button
-					style={{ color: this.state.themeColor }}
+					style={{ color: this.props.themeColor }}
 					onClick={() => {
-						this.context.dispatch({ type: 'CHANGE_COLOR', payload: 'red' })
+						this.props.change('red')
 					}}
 				>
 					Red
 				</button>
 				<button
-					style={{ color: this.state.themeColor }}
+					style={{ color: this.props.themeColor }}
 					onClick={() => {
-						this.context.dispatch({ type: 'CHANGE_COLOR', payload: 'blue' })
+						this.props.change('blue')
 					}}
 				>
 					Blue
@@ -43,4 +25,4 @@ class ThemeSwitch extends Component {
 	}
 }
 
-export default ThemeSwitch
+export default connect(ThemeSwitch)

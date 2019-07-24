@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Header from './Header'
 import Content from './Content'
-import { Context } from './context'
+import { Provider, connect } from './react-redux'
 
 const createStore = reducer => {
 	let state = null
@@ -44,10 +44,10 @@ class Index extends Component {
 	}
 	render() {
 		return (
-			<Context.Provider value={store}>
+			<Provider store={store}>
 				<Header />
 				<Content changeColor={e => this.setState({ themeColor: e })} />
-			</Context.Provider>
+			</Provider>
 		)
 	}
 }

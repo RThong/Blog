@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
-
-class TextSwitch extends Component {
+import { connect } from './react-redux'
+class TextChange extends Component {
 	render() {
+		console.log('textChange', this.props)
 		return (
 			<div>
-				<button>1111</button>
-				<button>2222</button>
+				<button onClick={() => this.props.changeText('1111')}>1111</button>
+				<button onClick={() => this.props.changeText('2222')}>2222</button>
 			</div>
 		)
 	}
 }
-
-export default TextSwitch
+const mapStateToProps = state => {
+	return {
+		text: state.text
+	}
+}
+const mapDispatchToProps = dispatch => {
+	return {
+		changeText(text) {
+			dispatch({ type: 'CHANGE_TEXT', payload: text })
+		}
+	}
+}
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TextChange)

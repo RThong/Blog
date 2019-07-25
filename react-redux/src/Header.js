@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { connect } from './react-redux'
 class Header extends Component {
 	render() {
-		return <h1 style={{ color: this.props.themeColor }}>hong</h1>
+		console.log('header', this.props)
+
+		return <h1 style={{ color: this.props.themeColor }}>hong{this.props.test}</h1>
 	}
 }
 
@@ -12,7 +14,4 @@ const mapStateToProps = state => {
 		themeColor: state.themeColor
 	}
 }
-export default connect(
-	Header,
-	mapStateToProps
-)
+export default connect(mapStateToProps)(Header)

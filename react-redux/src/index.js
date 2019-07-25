@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Header from './Header'
 import Content from './Content'
-import { Provider, connect } from './react-redux'
+import TextChange from './TextChange'
+import { Provider } from './react-redux'
 
 const createStore = reducer => {
 	let state = null
@@ -22,7 +23,8 @@ const createStore = reducer => {
 const reducer = (state, action) => {
 	if (!state) {
 		return {
-			themeColor: 'red'
+			themeColor: 'red',
+			text: '1111'
 		}
 	}
 	switch (action.type) {
@@ -31,7 +33,11 @@ const reducer = (state, action) => {
 				...state,
 				themeColor: action.payload
 			}
-
+		case 'CHANGE_TEXT':
+			return {
+				...state,
+				text: action.payload
+			}
 		default:
 			return state
 	}
@@ -40,13 +46,15 @@ const store = createStore(reducer)
 
 class Index extends Component {
 	state = {
-		themeColor: 'red'
+		test: 1
 	}
 	render() {
 		return (
 			<Provider store={store}>
-				<Header />
-				<Content changeColor={e => this.setState({ themeColor: e })} />
+				<Header test={this.state.test} />
+				<Content />
+				<TextChange />
+				<button onClick={() => this.setState({ test: this.state.test + 1 })}>click</button>
 			</Provider>
 		)
 	}

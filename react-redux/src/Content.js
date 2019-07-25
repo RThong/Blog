@@ -4,9 +4,11 @@ import ThemeSwitch from './ThemeSwitch'
 
 class Content extends Component {
 	render() {
+		console.log('content', this.props)
+
 		return (
 			<div>
-				<p style={{ color: this.props.themeColor }}>hong</p>
+				<p style={{ color: this.props.themeColor }}>{this.props.text}</p>
 				<ThemeSwitch />
 			</div>
 		)
@@ -15,11 +17,9 @@ class Content extends Component {
 
 const mapStateToProps = state => {
 	return {
-		themeColor: state.themeColor
+		themeColor: state.themeColor,
+		text: state.text
 	}
 }
 
-export default connect(
-	Content,
-	mapStateToProps
-)
+export default connect(mapStateToProps)(Content)

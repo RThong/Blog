@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from './react-redux'
 class ThemeSwitch extends Component {
 	render() {
+		console.log('ThemeSwitch', this.props)
+
 		return (
 			<div>
 				<button
@@ -39,7 +41,6 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 export default connect(
-	ThemeSwitch,
 	mapStateToProps,
 	mapDispatchToProps
-)
+)(ThemeSwitch)

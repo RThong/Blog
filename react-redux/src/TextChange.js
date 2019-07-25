@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { Context } from './context'
 
 class TextSwitch extends Component {
-	static contextType = Context
-
 	render() {
 		return (
 			<div>

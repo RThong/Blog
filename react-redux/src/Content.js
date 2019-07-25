@@ -3,16 +3,6 @@ import { connect } from './react-redux'
 import ThemeSwitch from './ThemeSwitch'
 
 class Content extends Component {
-	// state = {
-	// 	themeColor: ''
-	// }
-	// componentWillMount() {
-	// 	const store = this.context
-	// 	console.log(store.getState())
-	// 	this.setState({
-	// 		themeColor: this.props.themeColor
-	// 	})
-	// }
 	render() {
 		return (
 			<div>
@@ -23,4 +13,13 @@ class Content extends Component {
 	}
 }
 
-export default connect(Content)
+const mapStateToProps = state => {
+	return {
+		themeColor: state.themeColor
+	}
+}
+
+export default connect(
+	Content,
+	mapStateToProps
+)

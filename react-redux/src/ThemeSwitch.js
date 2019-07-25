@@ -25,4 +25,21 @@ class ThemeSwitch extends Component {
 	}
 }
 
-export default connect(ThemeSwitch)
+const mapStateToProps = state => {
+	return {
+		themeColor: state.themeColor
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		change(color) {
+			dispatch({ type: 'CHANGE_COLOR', payload: color })
+		}
+	}
+}
+export default connect(
+	ThemeSwitch,
+	mapStateToProps,
+	mapDispatchToProps
+)

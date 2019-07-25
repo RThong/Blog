@@ -1,6 +1,6 @@
 import React from 'react'
 const Context = React.createContext()
-const connect = WrapperComponent => {
+const connect = (WrapperComponent, mapStateToProps, mapDispatchToProps) => {
 	class Connect extends React.Component {
 		static contextType = Context
 		state = {
@@ -9,22 +9,26 @@ const connect = WrapperComponent => {
 
 		componentWillMount() {
 			const store = this.context
-			this.setState({
-				allProps: store.getState()
-			})
+			this._change(store)
+
 			store.subscribe(() => {
-				this.setState({
-					allProps: store.getState()
-				})
+				this._change(store)
 			})
 		}
-		_change(e) {
-			const { dispatch } = this.context
 
-			dispatch({ type: 'CHANGE_COLOR', payload: e })
+		_change(store) {
+			const stateProps = mapStateToProps ? mapStateToProps(store.getState()) : {}
+			const dispatchProps = mapDispatchToProps ? mapDispatchToProps(store.dispatch) : {}
+			this.setState({
+				allProps: {
+					...stateProps,
+					...dispatchProps,
+					...this.props
+				}
+			})
 		}
 		render() {
-			return <WrapperComponent {...this.state.allProps} change={e => this._change(e)} />
+			return <WrapperComponent {...this.state.allProps} />
 		}
 	}
 	return Connect

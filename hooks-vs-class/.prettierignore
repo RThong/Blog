@@ -1,0 +1,13 @@
+
+**/*.svg
+package.json
+lib/
+es/
+dist/
+yarn.lock
+.gitignore
+.prettierignore
+.eslintignore
+**/*.yml
+config/
+scripts/

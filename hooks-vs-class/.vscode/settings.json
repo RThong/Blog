@@ -1,0 +1,31 @@
+{
+    // "editor.formatOnSave": true,
+    "explorer.confirmDelete": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    // "workbench.colorTheme": "Material Theme Palenight",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    "editor.formatOnSave": true,
+    "eslint.enable": true, //是否开启vscode的eslint
+    "editor.codeActionsOnSave": {
+        //是否在保存的时候自动fix eslint
+        "source.fixAll.eslint": true
+    },
+    "eslint.options": {
+        //指定vscode的eslint所处理的文件的后缀
+        "extensions": [".js", ".jsx", ".vue", ".ts", ".tsx"]
+    },
+    "eslint.validate": [
+        //确定校验准则
+        "javascript",
+        "javascriptreact",
+        "html",
+        "vue",
+        "typescript",
+        "typescriptreact"
+    ]
+}

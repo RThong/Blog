@@ -1,5 +1,8 @@
+const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
+const dotenv = require("dotenv");
+
 const path = require("path");
 const { resolve } = path;
 
@@ -7,26 +10,37 @@ const isDev = process.env.NODE_ENV === "development";
 
 const PROJECT_PATH = resolve(__dirname, "../");
 
+const dotenvFile = resolve(PROJECT_PATH, `./.env.${process.env.NODE_ENV}`);
+
+// 加载.env*文件  默认加载.env文件
+dotenv.config({
+  path: fs.existsSync(dotenvFile)
+    ? dotenvFile
+    : resolve(PROJECT_PATH, `./.env`),
+});
+
 console.log("【base_api】", process.env.ENV);
 
+// 浏览器环境注入的变量
 const define = {
   dev: {
-    BASE_API: "/api/dev",
+    baseURL: "/api/dev",
   },
   test: {
-    BASE_API: "/api/test",
+    baseURL: "/api/test",
   },
   pro: {
-    BASE_API: "/api/pro",
+    baseURL: "/api/pro",
   },
 };
 
 const config = {
+  mode: isDev ? "development" : "production",
   entry: {
     app: resolve(PROJECT_PATH, "./src/index.jsx"),
   },
   output: {
-    filename: `js/[name]${isDev ? "" : ".[hash:8]"}.js`,
+    filename: `js/[name]${isDev ? "" : ".[fullhash:8]"}.js`,
     path: resolve(PROJECT_PATH, "./dist"),
   },
   module: {

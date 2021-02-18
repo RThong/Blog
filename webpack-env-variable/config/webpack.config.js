@@ -19,8 +19,6 @@ dotenv.config({
     : resolve(PROJECT_PATH, `./.env`),
 });
 
-console.log("【base_api】", process.env.ENV);
-
 // 浏览器环境注入的变量
 const define = {
   dev: {
